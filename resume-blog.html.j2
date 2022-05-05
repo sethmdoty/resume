@@ -1,0 +1,98 @@
+{%- macro oneentry(entry) -%}
+  {% if entry.name_short is defined %}
+    {% set name = entry.name_short %}
+  {% elif entry.name is defined %}
+    {% set name = entry.name %}
+  {% elif entry.degree is defined %}
+    {% set name = entry.degree %}
+  {% endif %}
+  {% if entry.title is defined %}
+    {% set title = entry.title %}
+  {% elif entry.university is defined %}
+    {% set title = entry.university %}
+  {% endif %}
+<div class="resume-entry">
+  <h3 class="resume-entry-head">
+    {% if name is defined %}
+    <span class="resume-entry-name">
+    {{ name }}
+    {% if entry.grade is defined %}
+    &ndash; {{ entry.grade }}
+    {% endif %}
+    </span>
+    {% endif %}
+    {% if entry.date is defined %}
+    <span class="resume-entry-date">{{ entry.date }}</span>
+    {% endif %}
+  </h3>
+  <div class="resume-entry-subhead">
+    {% if title is defined %}
+    <span class="resume-entry-title">
+      {{ title }}
+    </span>
+    {% endif %}
+  </div>
+  <div class="resume-entry-description">
+    {% if entry.description is defined %}
+      {% if entry.description is string %}
+    <p>{{ entry.description }}</p>
+      {% else %}
+    <ul class="resume-list">
+        {% for item in entry.description %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+      {% endif %}
+    {% endif %}
+</div>
+{% endmacro %}
+
+{%- macro entrylist(entries) -%}
+  {% for entry in entries %}{{ oneentry(entry) }}{% endfor %}
+{%- endmacro -%}
+
+<html>
+  <head>
+    <title>Resume</title>
+    <meta name="profile" content="{{ profile}}">
+  </head>
+  <body>
+    <div class="resume">
+      <h2 id="profile">Profile</h2>
+      <p class="resume-profile">
+        {{ profile }}
+      </p>
+
+      <h2 id="education">Education</h2>
+      {{ entrylist(education)|indent(6) }}
+
+      <h2 id="experience">Work Experience</h2>
+      {{ entrylist(experience)|indent(6) }}
+
+      {% if skills is defined %}
+      <h2 id="skills">Skills</h2>
+      <ul class="resume-skills">
+      {% for skill in skills %}
+        <li>
+          <em>{{ skill.name }}</em>
+          {%- if skill.description is defined -%}
+          : {{ skill.description }}
+          {%- endif -%}
+        </li>
+        {% if not loop.last %}
+        <!-- This is a hack to get bullets evenly spaced between the skills. -->
+        <!-- If you have a better solution, please let me know. -->
+        <li class="bullet">
+          &#8226;
+        </li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+      {% endif %}
+
+      <h2 id="Linkedin">Further Job History can be seen on my LinkedIn: https://www.linkedin.com/in/seth-doty-969ab147/  </h2>
+      </div>
+    </div>
+  </body>
+</html>

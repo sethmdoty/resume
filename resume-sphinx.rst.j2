@@ -1,0 +1,95 @@
+{%- macro oneentry(entry) -%}
+  {% if entry.name is defined %}
+    {% set name = entry.name %}
+  {% elif entry.degree is defined %}
+    {% set name = entry.degree %}
+  {% endif %}
+  {% if entry.title is defined %}
+    {% set title = entry.title %}
+  {% elif entry.university is defined %}
+    {% set title = entry.university %}
+  {% endif %}
+
+.. container:: resume resume-entry
+
+   .. container:: resume resume-entry-head
+
+      {% if name is defined %}
+      .. container:: resume resume-entry-name
+
+         {{ name }}
+
+      {% endif %}
+      {% if entry.date is defined %}
+      .. container:: resume resume-entry-date
+
+         {{ entry.date }}
+
+      {% endif %}
+
+   {% if title is defined %}
+   .. container:: resume resume-entry-subhead
+
+      {% if title is defined %}
+      .. container:: resume resume-entry-title
+
+        {{ title }}
+
+      {% endif %}
+   {% endif %}
+
+   {% if entry.description is defined %}
+   .. container:: resume resume-entry-description
+
+     {% if entry.description is string %}
+      {{ entry.description }}
+     {% else %}
+       {% for item in entry.description %}
+      * {{ item }}
+       {% endfor %}
+     {% endif %}
+   {% endif %}
+
+{% endmacro %}
+
+{%- macro entrylist(entries) -%}
+{% for entry in entries %}{{ oneentry(entry) }}{% endfor %}
+{%- endmacro -%}
+
+.. _resume-profile:
+
+Profile
+=======
+
+{{ profile }}
+
+.. _resume-education:
+
+Education
+=========
+
+{{ entrylist(education) }}
+
+.. _resume-experience:
+
+Work Experience
+==========================
+
+{{ entrylist(experience) }}
+
+Further Job History can be seen on my LinkedIn https://www.linkedin.com/in/seth-doty-969ab147/_
+.. _https://www.linkedin.com/in/seth-doty-969ab147/: https://www.linkedin.com/in/seth-doty-969ab147/
+
+{% if skills is defined %}
+.. _resume-skills:
+
+Skills
+======
+
+{% for skill in skills %}
+* *{{ skill.name }}*{% if skill.description is defined %}: {{ skill.description }}{% endif %}
+
+{% endfor %}
+
+{% endif %}
+

@@ -1,0 +1,60 @@
+latex:
+  replacements:
+    - ['&', '\\&']
+    - ['%', '\\%']
+    - ['\$', '\\$']
+    - ['_', '\\_']
+    - ['LaTeX', '\\LaTeX']
+    - ['//(.*?)//', '\\emph{\1}']
+  jinja2_delim: ['%<', '>%', '<<', '>>', '%%<', '>%%']
+  line_endings: "\n"
+html:
+  replacements:
+    - ['&', '&amp;']
+    - ['---', '&mdash;']
+    - ['--', '&ndash;']
+    - ['``', '&ldquo;']
+    - ["''", '&rdquo;']
+    - ["'", '&rsquo;']
+    - ['~', '&nbsp;']
+    - ['\\ ', ' ']
+    - ['LaTeX', 'L<span style="text-transform: uppercase; font-size: 70%; margin-left: -0.36em; vertical-align: 0.3em; line-height: 0; margin-right: -0.15em">a</span>T<span style="text-transform: uppercase; margin-left: -0.1667em; vertical-align: -0.5ex; line-height: 0; margin-right: -0.125em">e</span>X']
+    - ['//(.*?)//', '<em>\1</em>']
+  jinja2_delim: ['{%', '%}', '{{', '}}', '{#', '#}']
+  line_endings: "\n"
+txt:
+  replacements:
+    - ['---', '—']
+    - ['--', '–']
+    - ['``', '“']
+    - ["''", '”']
+    - ["'", '’']
+    - ['~', ' ']
+    - ['\\ ', ' ']
+    - ['//(.*?)//', '\1']
+  jinja2_delim: ['{%', '%}', '{{', '}}', '{#', '#}']
+  line_endings: "\r\n"
+markdown:
+  replacements:
+    - ['---', '—']
+    - ['--', '–']
+    - ['``', '“']
+    - ["''", '”']
+    - ["'", '’']
+    - ['~', ' ']
+    - ['\\ ', ' ']
+    - ['//(.*?)//', '*\1*']
+  jinja2_delim: ['{%', '%}', '{{', '}}', '{#', '#}']
+  line_endings: "\n"
+sphinx:
+  replacements:
+    - ['---', '—']
+    - ['--', '–']
+    - ['``', '“']
+    - ["''", '”']
+    - ["'", '’']
+    - ['~', ' ']
+    - ['\\ ', ' ']
+    - ['//(.*?)//', '*\1*']
+  jinja2_delim: ['{%', '%}', '{{', '}}', '{#', '#}']
+  line_endings: "\n"

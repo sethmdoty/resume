@@ -1,0 +1,14 @@
+archive/
+auto/
+*-nonweb.yml
+*.aux
+*.fdb_latexmk
+*.fls
+*.html
+*.log
+*.out
+*.pdf
+*.tex
+*.txt
+*.rst
+*.md
