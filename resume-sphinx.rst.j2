@@ -68,7 +68,10 @@ Profile
 Education
 =========
 
-{{ entrylist(education) }}
+{% for education in education %}
+* {{ education.degree }}, {{ education.date }}
+    {{ education.university }}
+{% endfor %}
 
 .. _resume-experience:
 
@@ -77,8 +80,7 @@ Work Experience
 
 {{ entrylist(experience) }}
 
-Further Job History can be seen on my LinkedIn https://www.linkedin.com/in/seth-doty-969ab147/_
-.. _https://www.linkedin.com/in/seth-doty-969ab147/: https://www.linkedin.com/in/seth-doty-969ab147/
+Further Job History can be seen on my LinkedIn: https://www.linkedin.com/in/seth-doty-969ab147/
 
 {% if skills is defined %}
 .. _resume-skills:
